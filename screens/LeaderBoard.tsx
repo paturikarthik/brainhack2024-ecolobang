@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E3FCF7'
   },
   leaderboardText: {
-    fontFamily:'JosefinSans-Italic',
+    fontFamily:'Font',
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
