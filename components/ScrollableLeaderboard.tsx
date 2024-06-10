@@ -16,7 +16,7 @@ import up from '../assets/positions/up.png';
 import goldMedal from '../assets/medals/gold-medal.png';
 import silverMedal from '../assets/medals/silver-medal.png';
 import bronzeMedal from '../assets/medals/bronze-medal.png';
-
+import YZY from '../assets/DP/YZY.png';
 const ScrollableLeaderboard = () => {
   const leaderboardData = [
     {
@@ -102,7 +102,6 @@ const ScrollableLeaderboard = () => {
   ];
   return (
     <View style={styles.container}>
-      <View style={styles.leaderboard}>
         <ScrollView>
           <View style={styles.leaderboard}>
             {leaderboardData.map(person => (
@@ -126,15 +125,27 @@ const ScrollableLeaderboard = () => {
             ))}
           </View>
         </ScrollView>
-      </View>
+        <View style={styles.person}>
+                <View style={ styles.personContainer}>
+                  <Text style={styles.rank}>14</Text>
+                    <Image source={down} style={styles.position} />
+                  <Image source={YZY} style={styles.avatar} />
+                  <View style={styles.personInfo}>
+                    <Text style={styles.personName}>Yeo Zong Yao</Text>
+                    <Text style={styles.XP}>175 XP</Text>
+                  </View>
+                </View>
+              </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 22.5,
     backgroundColor: '#E5F9FF',
+    maxHeight: '52%', 
+    minHeight: '76%', 
   },
   title: {
     fontSize: 24,
@@ -158,7 +169,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     width: 'auto',
-    height:98,
+    height:80,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
@@ -173,7 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     width: 'auto',
-    height:98,
+    height:80,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
@@ -188,7 +199,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     width: 'auto',
-    height:98,
+    height:80,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
@@ -203,7 +214,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     width: 'auto',
-    height:98,
+    height:80,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
@@ -215,25 +226,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   personInfo: {
-    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-  },
+    justifyContent: 'space-between',
+    flex: 1,
+    paddingHorizontal: 10,
+  },  
   avatar: {
     width: 60,
     height: 60,
     borderRadius: 30,
+    marginRight: 2,
   },
   personName: {
     fontFamily: 'JosefinSans-Medium',
-    fontSize: 20,
+    fontSize: 17,
     lineHeight:31,
-    alignSelf:'center',
     color: 'black',
     fontWeight: 'bold',
   },
   XP: {
-    fontWeight: 'normal',
-    alignSelf: 'flex-end',
+    fontFamily: 'JosefinSans-Medium',
+    fontSize: 17,
+    lineHeight:31,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   medal: {
     width: 37,

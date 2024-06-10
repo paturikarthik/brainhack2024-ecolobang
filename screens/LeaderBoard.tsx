@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import ScrollableLeaderboard from '../components/ScrollableLeaderboard';
 
 const LeaderBoard = () => {
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'black', 
+    padding:0
   },
   weekText: {
     fontFamily:'Font',
@@ -71,6 +72,66 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 8,
     color: 'black',
+  },
+  personContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  personInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1,
+    paddingHorizontal: 10,
+  },  
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 2,
+  },
+  personName: {
+    fontFamily: 'JosefinSans-Medium',
+    fontSize: 17,
+    lineHeight:31,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  XP: {
+    fontFamily: 'JosefinSans-Medium',
+    fontSize: 17,
+    lineHeight:31,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  medal: {
+    width: 37,
+    height: 37,
+  },
+  rank: {
+    width: 30,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  position: {
+    width: 35,
+    height: 30,
+  },
+  person: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 10,
+    width: 'auto',
+    height:80,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
 });
 
