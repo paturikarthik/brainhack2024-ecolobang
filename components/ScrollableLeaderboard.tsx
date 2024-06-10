@@ -142,10 +142,10 @@ const ScrollableLeaderboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 22.5,
+    padding: 5,
     backgroundColor: '#E5F9FF',
-    maxHeight: '52%', 
-    minHeight: '76%', 
+    maxHeight: '63%', 
+    minHeight: '64%', 
   },
   title: {
     fontSize: 24,
@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
     width: 30,
     textAlign: 'center',
     fontWeight: 'bold',
+    color: 'black',
   },
   position: {
     width: 35,

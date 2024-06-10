@@ -1,7 +1,7 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "include": [
-    "src/**/*",
-    "declarations.d.ts"
+    "c:/BrainHack-2024/ecolobang",
+    "c:/BrainHack-2024/ecolobang/declrations.d.ts"
   ]
 }

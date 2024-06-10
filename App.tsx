@@ -41,18 +41,14 @@ const App: React.FC = () => {
             inactiveTintColor: 'gray',
             style: {
               backgroundColor: 'black', // Background color of the tab bar
-            },
-            labelStyle: {
-              fontSize: 14, // Adjust the font size of the tab labels
-              fontFamily: 'FunFont', // Use the fun font
-            },
+            }
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Tab.Screen name="Leaderboard" component={LeaderBoard} options={{ headerShown: false }}/>
-        <Tab.Screen name="Challenges" component={Challenges} options={{ headerShown: false }}/>
-        <Tab.Screen name="NFC" component={NfcScreen} options={{ headerShown: false }}/>
-        <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }}/>
+        <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false, tabBarShowLabel: false }} />
+        <Tab.Screen name="Leaderboard" component={LeaderBoard} options={{ headerShown: false,tabBarShowLabel: false }}/>
+        <Tab.Screen name="Challenges" component={Challenges} options={{ headerShown: false,tabBarShowLabel: false }}/>
+        <Tab.Screen name="NFC" component={NfcScreen} options={{ headerShown: false,tabBarShowLabel: false }}/>
+        <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false,tabBarShowLabel: false }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
