@@ -26,7 +26,7 @@ const App: React.FC = () => {
             let iconColor: string = focused ? 'teal' : 'gray'; // Adjusted color for active and inactive tabs
             if (route.name === 'Home') {
               iconName = homeIcon;
-            } else if (route.name === 'LeaderBoard') {
+            } else if (route.name === 'Leaderboard') {
               iconName = leaderboardIcon;
             } else if (route.name === 'Profile') {
               iconName = profileIcon;
@@ -48,11 +48,11 @@ const App: React.FC = () => {
             },
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="LeaderBoard" component={LeaderBoard} />
-        <Tab.Screen name="Challenges" component={Challenges} />
-        <Tab.Screen name="NFC" component={NfcScreen} />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Tab.Screen name="Leaderboard" component={LeaderBoard} options={{ headerShown: false }}/>
+        <Tab.Screen name="Challenges" component={Challenges} options={{ headerShown: false }}/>
+        <Tab.Screen name="NFC" component={NfcScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

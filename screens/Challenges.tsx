@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const Challenges: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>Challenges</Text>
+      <Text>Challenges!</Text>
     </View>
   );
 };
