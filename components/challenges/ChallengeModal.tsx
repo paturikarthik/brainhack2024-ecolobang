@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   challengeContent: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginVertical: 15,
+    marginVertical: 12,
   },
   challengeTitle: {
     fontSize: 18,
