@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import YZY from '../../assets/DP/YZY.png';
 
 const ProfileHeader: React.FC = () => {
@@ -10,6 +10,9 @@ const ProfileHeader: React.FC = () => {
         <Text style={styles.profileText}>Yeo Zong Yao</Text>
         <Text style={styles.xpText}>1000 XP</Text>
       </View>
+      <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Sign Out</Text>
+        </TouchableOpacity>
     </View>
   );
 };
@@ -19,6 +22,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center', // Aligns items vertically in the center
     padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
   },
   profile: {
     width: 50, // Adjust as needed
@@ -36,6 +41,16 @@ const styles = StyleSheet.create({
   xpText: {
     fontSize: 14,
     color: 'gray',
+  },
+  button: {
+    backgroundColor: 'grey',
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
 

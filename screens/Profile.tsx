@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Pressable, ScrollView, TouchableOpacity } from 'react-native';
 import ProfileHeader from '../components/profile/ProfileHeader';
 import Rewards from '../components/profile/Rewards';
 
@@ -13,10 +13,6 @@ const Profile: React.FC = () => {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
         <ProfileHeader />
-        {/* <Text>Profile</Text> */}
-        <Pressable onPress={handleSignOut} style={styles.signOutButton}>
-          <Text>Sign Out</Text>
-        </Pressable>
         <Rewards />
       </View>
     </ScrollView>
