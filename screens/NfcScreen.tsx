@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Alert, StyleSheet, FlatList, Image, TouchableOpacity, Modal } from 'react-native';
-import { Avatar, Icon} from 'react-native-elements';
-import { initNfc, readNfcTag } from '../NFC/NFCManagerSetup';
+import { initNfc } from '../NFC/NFCManagerSetup';
 import AddApplianceModal from '../components/AddApplianceModal';
 
 const NfcScreen: React.FC = () => {
-  const [nfcTag, setNfcTag] = useState<any | null>(null);
   const [trackedItems, setTrackedItems] = useState([
     { id: '1', name: 'Washing Machine', category: 'Water', time: '00:15:14' },
     { id: '2', name: 'Light Bulb', category: 'Electricity', time: '05:12:54' },
@@ -16,15 +14,7 @@ const NfcScreen: React.FC = () => {
     initNfc();
   }, []);
 
-  const handleReadNfc = async () => {
-    const tag = await readNfcTag();
-    if (tag) {
-      setNfcTag(tag);
-      Alert.alert('NFC Tag', JSON.stringify(tag));
-    }
-  };
-
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: any }) => (
     <View style={styles.item}>
       <View style={styles.itemTextContainer}>
         <Text style={styles.itemName}>{item.name}</Text>

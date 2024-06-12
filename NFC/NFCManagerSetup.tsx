@@ -1,11 +1,9 @@
-import NfcManager, { NfcTech } from 'react-native-nfc-manager';
+import NfcManager, { NfcTech, Ndef } from 'react-native-nfc-manager';
 
-// Initialize NFC
 export async function initNfc(): Promise<void> {
-  await NfcManager.start();
+
 }
 
-// Function to read NFC tag
 export async function readNfcTag(): Promise<any> {
   try {
     // Request NFC technology
@@ -13,7 +11,7 @@ export async function readNfcTag(): Promise<any> {
     // Get the NFC tag
     const tag = await NfcManager.getTag();
     console.log(tag);
-    await NfcManager.setAlertMessageIOS("NFC tag scanned!");
+    await NfcManager.setAlertMessage("NFC tag scanned!");
     // Cancel the NFC technology request
     await NfcManager.cancelTechnologyRequest();
     return tag;
@@ -23,3 +21,4 @@ export async function readNfcTag(): Promise<any> {
     return null;
   }
 }
+

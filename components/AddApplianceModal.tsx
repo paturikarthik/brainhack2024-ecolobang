@@ -1,7 +1,66 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Alert,
+} from 'react-native';
+import NfcManager, {Ndef, NfcTech, TagEvent} from 'react-native-nfc-manager';
+import {useState} from 'react';
+import {MongoClient} from 'mongodb'
 
-const AddApplianceModal = ({ isVisible, onClose }) => {
+const uri = process.env.MONGODB_URI||''
+const mongodb = new MongoClient(uri)
+
+
+const [name, setName] = useState('hi');
+const [trackingOptions, setTrackingOptions] = useState('water');
+const [applianceType, setApplianceType] = useState('washingmachine');
+const AddApplianceModal = ({
+  isVisible,
+  onClose,
+}: {
+  isVisible: boolean;
+  onClose: () => void;
+}) => {
+  const onAddItems = async (payloadData: {
+    name: string;
+    trackingOptions: string;
+    applianceType: string;
+  }) => {
+    setName(name)
+    setTrackingOptions(trackingOptions)
+    setApplianceType(applianceType)
+    const usage = 10;
+    try {
+      await NfcManager.requestTechnology(NfcTech.Ndef);
+      const update = await mongodb.db('brainhack').collection('devices').insertOne({
+        name:name,
+        trackingOptions:trackingOptions,
+        applianceType:applianceType,
+        usage:usage
+      })
+      const bytes = Ndef.encodeMessage([
+        Ndef.textRecord(payloadData.name),
+        Ndef.textRecord(payloadData.trackingOptions),
+        Ndef.textRecord(payloadData.applianceType),
+        Ndef.textRecord(update.insertedId.toString())
+      ]);
+
+      if (bytes) {
+        await NfcManager.ndefHandler.writeNdefMessage(bytes);
+      }
+
+      Alert.alert('Success', 'Item added successfully')
+    } catch (ex) {
+      console.warn(ex);
+    } finally {
+      NfcManager.cancelTechnologyRequest();
+    }
+  };
+
   return (
     <Modal visible={isVisible}>
       <View style={styles.modal}>
@@ -22,7 +81,7 @@ const AddApplianceModal = ({ isVisible, onClose }) => {
 const styles = StyleSheet.create({
   modal: {
     justifyContent: 'flex-end',
-    margin: 0
+    margin: 0,
   },
   modalContent: {
     backgroundColor: '#aaa',
