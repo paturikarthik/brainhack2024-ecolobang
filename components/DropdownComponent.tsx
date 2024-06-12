@@ -5,6 +5,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 const data = [
   { label: 'Shower', value: '1' },
   { label: 'Washing Machine', value: '2' },
+  {label:'Air Conditioner',value:'3'},
 ];
 
 const DropdownComponent = () => {

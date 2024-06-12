@@ -6,21 +6,36 @@ import NfcScreen from './screens/NfcScreen';
 import Profile from './screens/Profile';
 import Challenges from './screens/Challenges';
 import LeaderBoard from './screens/LeaderBoard';
-import {Image} from 'react-native';
-
+import {Alert, Image} from 'react-native';
 import homeIcon from './assets/Home.png';
 import leaderboardIcon from './assets/Leaderboard.png';
 import profileIcon from './assets/Profile.png';
 import nfcIcon from './assets/NFC.png';
 import challengesIcon from './assets/challenges.png';
 import NfcManager, {NfcEvents, TagEvent} from 'react-native-nfc-manager';
-import {MongoClient, ObjectId} from 'mongodb';
+
 const Tab = createBottomTabNavigator();
-const uri = process.env.MONGODB_URI || '';
-const mongodb = new MongoClient(uri);
+
 const App: React.FC = () => {
   const [hasNfc, setHasNFC] = useState(true);
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const [showerState, setShowerState] = useState(false);
+  const [washingMachineState, setWashingMachineState] = useState(false);
+  const [airConditionerState, setAirConditionerState] = useState(false);
+  const [trackedItems, setTrackedItems] = useState([
+    { id: '1', name: 'Washing Machine', category: 'Water', time: '00:15:14', start: '00:00:00', end: '00:00:00' },
+    { id: '2', name: 'Light Bulb', category: 'Electricity', time: '05:12:54' , start: '00:00:01', end: '00:00:00' },
+    {id:'1', name: 'Shower', category: 'Water', time: null, start: '1718224709000', end:null},
+    {id:'2', name: 'AC', category: 'Electricity', time: null, start: '1718224709001', end:null},
+    {id:'3', name: 'Washing Machine', category: 'Water', time: null, start: '1718224709002', end:null},
+  ]);
 
+  const addTrackedItem = (newItem: any) => {
+    setTrackedItems(prevItems => [...prevItems, newItem]);
+  };
+  const updateTrackedItem = (updatedItem: any) => {
+    setTrackedItems(prevItems => prevItems.map(item => item.id === updatedItem.id && item.end==null ? updatedItem : item));
+  };
   useEffect(() => {
     const checkIsSupported = async () => {
       const deviceIsSupported = await NfcManager.isSupported();
@@ -33,8 +48,10 @@ const App: React.FC = () => {
 
     checkIsSupported();
   }, []);
+  
 
   useEffect(() => {
+    if (!isAddModalVisible){
     readTag();
     NfcManager.setEventListener(
       NfcEvents.DiscoverTag,
@@ -52,39 +69,73 @@ const App: React.FC = () => {
             if (record.tnf === 1) {
               const payloadText = String.fromCharCode
                 .apply(null, record.payload)
-                .substring(2);
+                .substring(3);
               console.log(`NDEF Record ${i + 1}: ${payloadText}`);
               payload.push(payloadText);
             }
           }
         }
-        if (payload.length > 0) {
-          const device = await mongodb
-            .db('brainhack')
-            .collection('devices')
-            .findOne({_id: new ObjectId(payload[3])});
-          const usage = await mongodb
-            .db('brainhack')
-            .collection('usages')
-            .findOne({deviceID: device?._id, state:"active"});
-          if (usage) {
-            const stop = await mongodb
-              .db('brainhack')
-              .collection('usages')
-              .updateOne(
-                {_id: new ObjectId(payload[4])},
-                {$set: {stop: Date.now(), usage: device?.usage * (Date.now()-usage[0].start)/1000,state:"stopped"}},
-              );
+        if (payload.length > 0 && !isAddModalVisible) {
+          console.log("hi")
+          console.log(payload)
+          if(payload[3] == "1"){
+            if (showerState == false && !trackedItems.find(item => item.id === '1' && item.end==null)) {
+              setShowerState(true);
+              const newItem = { id: trackedItems.length + 1, name: payload[0], category: 'Water', time:null, start: Date.now().toString(), end: null };
+              addTrackedItem(newItem);
+              console.log("hi here")
+              console.log(trackedItems);
+              console.log(isAddModalVisible)
+            } else {
+              setShowerState(false);
+              const currentItem = trackedItems.find(item => item.id === '1' && item.end==null);
+              if (currentItem) {
+                currentItem.end = Date.now().toString();
+                currentItem.time = (parseInt(currentItem.end) - parseInt(currentItem.start)).toString();
+                const usage = 960* parseInt(currentItem.time)/(60*60*1000);
+                currentItem.time = millisToHHMMSS(parseInt(currentItem.end) - parseInt(currentItem.start));
+                Alert.alert(`You consumed ${(usage).toPrecision(3)}L of water.`,`That's enough water to fill up ${usage/1.5} bottles of water!`);
+                updateTrackedItem(currentItem);
+                console.log("hi there")
+                console.log(trackedItems);
+              }
+            }
+            }
+          else if(payload[3] == "2"){
+            if (washingMachineState == false && !trackedItems.find(item => item.id === '2' && item.end==null)) {
+              setWashingMachineState(true);
+              const newItem = { id: trackedItems.length + 1, name: payload[0], category: 'Water', time:null, start: Date.now().toString(), end: null };
+              addTrackedItem(newItem);
+            } else {
+              setWashingMachineState(false);
+              const currentItem = trackedItems.find(item => item.id === '2' && item.end==null);
+              if (currentItem) {
+                currentItem.end = Date.now().toString();
+                currentItem.time = (parseInt(currentItem.end) - parseInt(currentItem.start)).toString();
+                const usage = 75* parseInt(currentItem.time)/(60*60*1000);
+                currentItem.time = millisToHHMMSS(parseInt(currentItem.end) - parseInt(currentItem.start));
+                updateTrackedItem(currentItem);
+                Alert.alert(`You consumed ${(usage).toPrecision(3)}L of water.`, `That's enough water to fill up ${usage/1.5} bottles of water!`);
+                
+              }
+            }
           } else {
-            const start = await mongodb
-              .db('brainhack')
-              .collection('usages')
-              .insertOne({
-                deviceID: device?._id,
-                start: Date.now(),
-                usageRate: device?.usage,
-                state:"active"
-              });
+            if (airConditionerState == false && !trackedItems.find(item => item.id === '3' && item.end==null)) {
+              setAirConditionerState(true);
+              const newItem = { id: trackedItems.length + 1, name: payload[0], category: 'Electricity', time:null, start: Date.now().toString(), end: null };
+              addTrackedItem(newItem);
+            } else {
+              setAirConditionerState(false);
+              const currentItem = trackedItems.find(item => item.id === '3' && item.end==null);
+              if (currentItem) {
+                currentItem.end = Date.now().toString();
+                currentItem.time = (parseInt(currentItem.end) - parseInt(currentItem.start)).toString();
+                const usage = 1.4* parseInt(currentItem.time)/(60*60*1000);
+                currentItem.time = millisToHHMMSS(parseInt(currentItem.end) - parseInt(currentItem.start));
+                updateTrackedItem(currentItem);
+                Alert.alert(`You consumed ${(usage).toPrecision(3)}kWh of electricity. At this rate, you need to plant ${usage*0.309*1.4*365/21} trees yearly to offset your usage!`);
+              }
+            }
           }
         }
       },
@@ -92,8 +143,15 @@ const App: React.FC = () => {
     return () => {
       NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
     };
+  }
   }, []);
-
+  function millisToHHMMSS(millis: number): string {
+    const seconds = Math.floor((millis / 1000) % 60);
+    const minutes = Math.floor((millis / (1000 * 60)) % 60);
+    const hours = Math.floor((millis / (1000 * 60 * 60)) % 24);
+  
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
   const readTag = async () => {
     await NfcManager.registerTagEvent();
   };
@@ -146,9 +204,17 @@ const App: React.FC = () => {
         />
         <Tab.Screen
           name="NFC"
-          component={NfcScreen}
-          options={{headerShown: false, tabBarShowLabel: false}}
-        />
+          options={{ headerShown: false, tabBarShowLabel: false }}
+        >
+          {() => (
+            <NfcScreen
+              trackedItems={trackedItems}
+              addTrackedItem={addTrackedItem}
+              isAddModalVisible={isAddModalVisible}
+              setIsAddModalVisible={setIsAddModalVisible}
+            />
+          )}
+        </Tab.Screen>
         <Tab.Screen
           name="Profile"
           component={Profile}

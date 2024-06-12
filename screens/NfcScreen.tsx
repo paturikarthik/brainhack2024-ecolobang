@@ -3,18 +3,21 @@ import { View, Text, Button, Alert, StyleSheet, FlatList, Image, TouchableOpacit
 import { initNfc } from '../NFC/NFCManagerSetup';
 import AddApplianceModal from '../components/AddApplianceModal';
 
-const NfcScreen: React.FC = () => {
-  const [trackedItems, setTrackedItems] = useState([
-    { id: '1', name: 'Washing Machine', category: 'Water', time: '00:15:14' },
-    { id: '2', name: 'Light Bulb', category: 'Electricity', time: '05:12:54' },
-  ]);
-  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
-
+const NfcScreen: React.FC<{trackedItems: any[];
+addTrackedItem: (item: any) => void;
+isAddModalVisible: boolean;
+setIsAddModalVisible: React.Dispatch<React.SetStateAction<boolean>>}> = ({
+  trackedItems,
+  addTrackedItem,
+  isAddModalVisible,
+  setIsAddModalVisible,
+}) => {
   useEffect(() => {
     initNfc();
   }, []);
 
   const renderItem = ({ item }: { item: any }) => (
+    item.end && 
     <View style={styles.item}>
       <View style={styles.itemTextContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
@@ -36,6 +39,7 @@ const NfcScreen: React.FC = () => {
     setIsAddModalVisible(false);
   };
 
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}> 
@@ -51,7 +55,7 @@ const NfcScreen: React.FC = () => {
       <FlatList
         data={trackedItems}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.start}
         contentContainerStyle={styles.listContainer}
       />
       <Text style={styles.footerText}>

@@ -14,10 +14,7 @@ import {
 } from 'react-native';
 import NfcManager, {Ndef, NfcTech, TagEvent} from 'react-native-nfc-manager';
 import {useState} from 'react';
-import {MongoClient} from 'mongodb'
-
-const uri = process.env.MONGODB_URI||''
-const mongodb = new MongoClient(uri)
+import axios from 'axios';
 
 const AddApplianceModal = ({
   isVisible,
@@ -28,36 +25,28 @@ const AddApplianceModal = ({
 }) => {
   const [name, setName] = useState('hi');
   const [trackingOptions, setTrackingOptions] = useState('water');
-  const [applianceType, setApplianceType] = useState('washingmachine');
+  const [applianceType, setApplianceType] = useState('washing machine');
   
   const [selectedIndex, setIndex] = React.useState(0);
 
   const onAddItems = async () => {
-    setName(name)
-    setTrackingOptions(trackingOptions)
-    setApplianceType(applianceType)
-    const usage = 10;
+    setApplianceType(trackingOptions== "electricity" ? "Air Conditioner" : name.toLowerCase()=="shower" ? "Shower" : "Washing Machine");
+    console.log(name, trackingOptions, applianceType)
     try {
+      Alert.alert("Scan your new NFC Tag!")
       await NfcManager.requestTechnology(NfcTech.Ndef);
-      const update = await mongodb.db('brainhack').collection('devices').insertOne({
-        name:name,
-        trackingOptions:trackingOptions,
-        applianceType:applianceType,
-        usage:usage
-      })
+      const id = applianceType == "Shower" ? "1" : applianceType == "Washing Machine" ? "2" : applianceType == "Air Conditioner" ? "3" : "1"
       const bytes = Ndef.encodeMessage([
         Ndef.textRecord(name),
         Ndef.textRecord(trackingOptions),
         Ndef.textRecord(applianceType),
-        Ndef.textRecord(update.insertedId.toString())
+        Ndef.textRecord(id)
       ]);
-
       if (bytes) {
         await NfcManager.ndefHandler.writeNdefMessage(bytes);
       }
 
       Alert.alert('Success', 'Item added successfully')
-      onClose()
     } catch (ex) {
       console.warn(ex);
     } finally {
@@ -72,12 +61,12 @@ const AddApplianceModal = ({
         <View style={styles.modalContent}>
           <Text style={styles.title}>Pair a new appliance</Text>
           <Text style={{marginBottom: 10}}>Name</Text>
-          <TextInput placeholder="Name" style={styles.input} />
+          <TextInput placeholder="Name" style={styles.input} onChange={(e) => setName(e.nativeEvent.text)} />
           <Text style={{marginTop: 20}}>Track</Text>
           <View style={styles.checkboxContainer}>
             <CheckBox
               checked={selectedIndex === 0}
-              onPress={() => setIndex(0)}
+              onPress={() =>{ setIndex(0), setTrackingOptions("water")}}
               checkedIcon="dot-circle-o"
               uncheckedIcon="circle-o"
             />
@@ -86,7 +75,7 @@ const AddApplianceModal = ({
           <View style={styles.checkboxContainer}>
             <CheckBox
               checked={selectedIndex === 1}
-              onPress={() => setIndex(1)}
+              onPress={() => {setIndex(1), setTrackingOptions("electricity")}}
               checkedIcon="dot-circle-o"
               uncheckedIcon="circle-o"
             />
