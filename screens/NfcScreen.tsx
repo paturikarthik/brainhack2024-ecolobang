@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Alert, StyleSheet, FlatList, Image, TouchableOpacity, Modal } from 'react-native';
-import { Avatar, Icon} from 'react-native-elements';
-import { initNfc, readNfcTag } from '../NFC/NFCManagerSetup';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  Button,
+  Alert,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
+import {Avatar, Icon} from 'react-native-elements';
+import {initNfc, readNfcTag} from '../NFC/NFCManagerSetup';
 import AddApplianceModal from '../components/AddApplianceModal';
 
 const NfcScreen: React.FC = () => {
   const [nfcTag, setNfcTag] = useState<any | null>(null);
   const [trackedItems, setTrackedItems] = useState([
-    { id: '1', name: 'Washing Machine', category: 'Water', time: '00:15:14' },
-    { id: '2', name: 'Light Bulb', category: 'Electricity', time: '05:12:54' },
+    {id: '1', name: 'Washing Machine', category: 'Water', time: '00:15:14'},
+    {id: '2', name: 'Light Bulb', category: 'Electricity', time: '05:12:54'},
   ]);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
@@ -24,7 +34,7 @@ const NfcScreen: React.FC = () => {
     }
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}: any) => (
     <View style={styles.item}>
       <View style={styles.itemTextContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
@@ -35,12 +45,10 @@ const NfcScreen: React.FC = () => {
   );
 
   const handleAddItem = () => {
-    setIsAddModalVisible(true)
+    setIsAddModalVisible(true);
   };
 
-  const handleEditItem = () => {
-  
-  };
+  const handleEditItem = () => {};
 
   const handleCloseAddModal = () => {
     setIsAddModalVisible(false);
@@ -48,7 +56,7 @@ const NfcScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}> 
+      <View style={styles.header}>
         <TouchableOpacity style={styles.editButton} onPress={handleEditItem}>
           <Text style={styles.editButtonText}>Edit</Text>
         </TouchableOpacity>
@@ -61,7 +69,7 @@ const NfcScreen: React.FC = () => {
       <FlatList
         data={trackedItems}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
       />
       <Text style={styles.footerText}>
@@ -78,16 +86,17 @@ const NfcScreen: React.FC = () => {
           size="small"
         /> */}
       </View>
-      <AddApplianceModal isVisible={isAddModalVisible} onClose={handleCloseAddModal} />
+      <AddApplianceModal
+        isVisible={isAddModalVisible}
+        onClose={handleCloseAddModal}
+      />
     </View>
   );
 };
 
-
-
 const styles = StyleSheet.create({
   icon: {
-    width: 16,  // Adjust the width to make the icon smaller
+    width: 16, // Adjust the width to make the icon smaller
     height: 16, // Adjust the height to make the icon smaller
   },
 
@@ -118,10 +127,9 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingHorizontal: 16,
     fontFamily: 'JosefinSans-Medium',
-
   },
   item: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     fontFamily: 'JosefinSans-Medium',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -130,24 +138,23 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   itemTextContainer: {
-    flexDirection: 'column',    
+    flexDirection: 'column',
     fontFamily: 'JosefinSans-Medium',
   },
   itemName: {
     fontSize: 18,
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     fontFamily: 'JosefinSans-Medium',
   },
   itemCategory: {
     fontSize: 14,
-    color: '#888', 
+    color: '#888',
     fontFamily: 'JosefinSans-Medium',
   },
   itemTime: {
     fontSize: 18,
     fontWeight: 'bold',
     fontFamily: 'JosefinSans-Medium',
-
   },
   footerText: {
     textAlign: 'center',
@@ -177,7 +184,6 @@ const styles = StyleSheet.create({
     color: '#000', // Text color
     fontSize: 24, // Text size
     fontFamily: 'JosefinSans-Medium',
-
   },
   editButton: {
     backgroundColor: '#E8F5E9', // Button background color

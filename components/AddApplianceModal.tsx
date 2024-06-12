@@ -1,9 +1,16 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Modal, TextInput } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  TextInput,
+} from 'react-native';
+import {CheckBox} from 'react-native-elements';
 import DropdownComponent from './DropdownComponent';
 
-const AddApplianceModal = ({ isVisible, onClose }) => {
+const AddApplianceModal = ({isVisible, onClose}: any) => {
   const [selectedIndex, setIndex] = React.useState(0);
 
   return (
@@ -53,7 +60,7 @@ const styles = StyleSheet.create({
     marginTop: '30%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   modalContent: {
     backgroundColor: '#ddd',
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   title: {
-    fontFamily:'JosefinSans-Medium',
+    fontFamily: 'JosefinSans-Medium',
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 5,
     fontWeight: '300',
-    paddingLeft: 15
+    paddingLeft: 15,
   },
   checkboxContainer: {
     display: 'flex',

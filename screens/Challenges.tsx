@@ -7,6 +7,7 @@ import RecommendedChallenges from '../components/challenges/RecommendedChallenge
 import ChallengeModal from '../components/challenges/ChallengeModal';
 import challengeData from '../components/challenges/challenges';
 
+
 const Challenges: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [challengeName, setChallengeName] = useState('');
@@ -15,7 +16,7 @@ const Challenges: React.FC = () => {
   const [challengeReward, setChallengeReward] = useState('');
   const [challengeImage, setChallengeImage] = useState(challengeData[0].image);
 
-  const setActiveChallenge = number => {
+  const setActiveChallenge = (number: any) => {
     setChallengeName(challengeData[number].title);
     setChallengeTimeline(challengeData[number].challengeTimeline);
     setChallengeDescription(challengeData[number].challengeDescription);
