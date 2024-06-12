@@ -1,11 +1,12 @@
 import React from 'react';
 import {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import ChallengesTitle from '../components/challenges/ChallengesTitle';
 import LatestChallenges from '../components/challenges/LatestChallenges';
 import RecommendedChallenges from '../components/challenges/RecommendedChallenges';
 import ChallengeModal from '../components/challenges/ChallengeModal';
 import challengeData from '../components/challenges/challenges';
+
 
 const Challenges: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,7 +26,7 @@ const Challenges: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <ChallengesTitle />
       <LatestChallenges setActiveChallenge={setActiveChallenge} />
       <View style={styles.space} />
@@ -39,7 +40,7 @@ const Challenges: React.FC = () => {
         challengeReward={challengeReward}
         challengeImage={challengeImage}
       />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0FFF0',
   },
   space: {
-    margin: 30,
+    margin: 5,
   },
 });
 

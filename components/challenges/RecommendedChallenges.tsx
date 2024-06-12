@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 0, // Remove bottom padding
     backgroundColor: '#F0FFF0',
-    minHeight: 250,
-    maxHeight: 300,
+    minHeight: 100,
+    maxHeight: 320,
     width: '100%',
   },
   challengesText: {
@@ -78,18 +78,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   challengeImage: {
-    width: '100%',
-    height: '100%',
+    width: '90%',
+    height: '80%',
     resizeMode: 'cover',
     borderRadius: 8,
-    marginBottom: 8,
+    marginBottom: 2,
   },
   challengeTitle: {
     fontSize: 12,
     fontWeight: 'bold',
     color: '#006400',
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: 4,
   },
 });
 

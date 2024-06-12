@@ -43,16 +43,16 @@ const LatestChallenges: React.FC<{setActiveChallenge: Function}> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    width: '100%',
     paddingBottom: 0, // Remove bottom padding
     backgroundColor: '#F0FFF0',
-    minHeight: 250,
-    maxHeight: 300,
+    minHeight: 200,
+    maxHeight: 270,
+    marginLeft: 42
   },
   challengesText: {
     fontSize: 24,
     color: '#006400',
-    marginBottom: 0, // Remove bottom margin
     textAlign: 'left',
   },
   challenges: {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     width: 300, // Set a fixed width for each challenge item
     marginRight: 16, // Space between items
     padding: 16,
-    marginTop: 16,
+
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
     shadowColor: '#000',
@@ -76,18 +76,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   challengeImage: {
-    width: '100%',
+    width: '80%',
     height: '80%',
     resizeMode: 'cover',
     borderRadius: 8,
-    marginBottom: 8,
+    marginBottom: 3,
   },
   challengeTitle: {
     fontSize: 12,
     fontWeight: 'bold',
     color: '#006400',
     textAlign: 'center',
-    marginBottom: 15,
   },
 });
 

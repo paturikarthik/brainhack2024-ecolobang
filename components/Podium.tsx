@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
-    height: 200,
+    height: 190,
   },
   first: {
     alignItems: 'center',
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   rest: {
     alignItems: 'center',
-    marginVertical: -27.5,
+    marginVertical: -18.5,
     marginHorizontal:20
   },
   avatar: {

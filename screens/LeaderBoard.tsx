@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginTop: 10, // Adjust based on the height of your LeaderBoardTitle component
+    marginTop: 8, 
     justifyContent: 'center',
     alignItems: 'center',
   },

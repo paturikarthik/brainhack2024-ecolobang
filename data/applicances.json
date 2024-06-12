@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Portable heater (1500W)",
+    "type": "electric",
+    "usage": "1.5kWh per hour"
+  },
+  {
+    "name": "Whole house fan",
+    "type": "electric",
+    "usage": "0.2-0.4 kWh per hour"
+  },
+  {
+    "name": "Window/wall (8kBtu) (120V-12 EER)",
+    "type": "electric",
+    "usage": "0.73 kWh per hour"
+  },
+  {
+    "name": "Electric water heater",
+    "type": "electric",
+    "usage": "380-500 kWh per month"
+  },
+  {
+    "name": "Heat pump (50-75 gal) water heater",
+    "type": "electric",
+    "usage": "77 kWh per month"
+  },
+  {
+    "name": "Oven",
+    "type": "electric",
+    "usage": "2.3 kWh per hour"
+  },
+  {
+    "name": "Dishwasher: normal cycle (not including hot water)",
+    "type": "electric",
+    "usage": "1-2.17 kWh per load"
+  },
+  {
+    "name": "Refrigerator, 15 cu. ft. (2000 unit)",
+    "type": "electric",
+    "usage": "72 kWh per month"
+  },
+  {
+    "name": "Hair Dryer",
+    "type": "electric",
+    "usage": "1.5 kWh per hour"
+  }
+]

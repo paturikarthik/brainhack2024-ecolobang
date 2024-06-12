@@ -125,7 +125,7 @@ const ScrollableLeaderboard = () => {
             ))}
           </View>
         </ScrollView>
-        <View style={styles.person}>
+        <View style={styles.personYeo}>
                 <View style={ styles.personContainer}>
                   <Text style={styles.rank}>14</Text>
                     <Image source={down} style={styles.position} />
@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 5,
     backgroundColor: '#E5F9FF',
-    maxHeight: '63%', 
-    minHeight: '64%', 
+    maxHeight: '64.5%', 
+    minHeight: '63.5%', 
   },
   title: {
     fontSize: 24,
@@ -175,6 +175,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
+  },
+  personYeo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    padding: 10,
+    marginBottom: 0,
+    borderRadius: 10,
+    width: 'auto',
+    height:80,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+    marginTop:0
   },
   firstPerson: {
     flexDirection: 'row',

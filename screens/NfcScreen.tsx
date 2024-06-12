@@ -28,12 +28,10 @@ setIsAddModalVisible: React.Dispatch<React.SetStateAction<boolean>>}> = ({
   );
 
   const handleAddItem = () => {
-    setIsAddModalVisible(true)
+    setIsAddModalVisible(true);
   };
 
-  const handleEditItem = () => {
-  
-  };
+  const handleEditItem = () => {};
 
   const handleCloseAddModal = () => {
     setIsAddModalVisible(false);
@@ -42,7 +40,7 @@ setIsAddModalVisible: React.Dispatch<React.SetStateAction<boolean>>}> = ({
   
   return (
     <View style={styles.container}>
-      <View style={styles.header}> 
+      <View style={styles.header}>
         <TouchableOpacity style={styles.editButton} onPress={handleEditItem}>
           <Text style={styles.editButtonText}>Edit</Text>
         </TouchableOpacity>
@@ -72,16 +70,17 @@ setIsAddModalVisible: React.Dispatch<React.SetStateAction<boolean>>}> = ({
           size="small"
         /> */}
       </View>
-      <AddApplianceModal isVisible={isAddModalVisible} onClose={handleCloseAddModal} />
+      <AddApplianceModal
+        isVisible={isAddModalVisible}
+        onClose={handleCloseAddModal}
+      />
     </View>
   );
 };
 
-
-
 const styles = StyleSheet.create({
   icon: {
-    width: 16,  // Adjust the width to make the icon smaller
+    width: 16, // Adjust the width to make the icon smaller
     height: 16, // Adjust the height to make the icon smaller
   },
 
@@ -98,6 +97,8 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
+    fontWeight: 'bold',
+    color: 'black',
   },
   editText: {
     fontSize: 16,
@@ -108,14 +109,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: 'JosefinSans-Medium',
     fontWeight: 'bold',
+    color: 'black',
   },
   listContainer: {
     paddingHorizontal: 16,
     fontFamily: 'JosefinSans-Medium',
-
+    fontWeight: 'bold',
+    color: 'black',
   },
   item: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     fontFamily: 'JosefinSans-Medium',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -124,24 +127,27 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   itemTextContainer: {
-    flexDirection: 'column',    
+    flexDirection: 'column',
     fontFamily: 'JosefinSans-Medium',
+    fontWeight: 'bold',
+    color: 'black',
   },
   itemName: {
     fontSize: 18,
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     fontFamily: 'JosefinSans-Medium',
+    color: 'black',
   },
   itemCategory: {
     fontSize: 14,
-    color: '#888', 
+    color: '#888',
     fontFamily: 'JosefinSans-Medium',
   },
   itemTime: {
     fontSize: 18,
     fontWeight: 'bold',
     fontFamily: 'JosefinSans-Medium',
-
+    color: 'black',
   },
   footerText: {
     textAlign: 'center',
@@ -154,7 +160,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    padding: 16,
     borderTopWidth: 1,
     borderTopColor: '#ddd',
     fontFamily: 'JosefinSans-Medium',
@@ -171,7 +176,6 @@ const styles = StyleSheet.create({
     color: '#000', // Text color
     fontSize: 24, // Text size
     fontFamily: 'JosefinSans-Medium',
-
   },
   editButton: {
     backgroundColor: '#E8F5E9', // Button background color

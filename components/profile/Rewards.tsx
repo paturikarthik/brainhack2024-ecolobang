@@ -73,38 +73,41 @@ const RewardSection: React.FC = () => {
   return (
     <View style={styles.rewardContainer}>
       <Text style={styles.rewardTitle}>Rewards</Text>
-      <FlatList
-        data={rewards}
-        keyExtractor={item => item.id.toString()}
-        numColumns={2}
-        renderItem={({item}) => (
-          <RewardCard
-            icon={item.icon}
-            description={item.description}
-            backgroundColor={item.backgroundColor}
-            xp={item.xp}
-          />
-        )}
-        columnWrapperStyle={styles.row}
-      />
+      <View style={styles.gridContainer}>
+        {rewards.map((item) => (
+          <View key={item.id} style={styles.itemContainer}>
+            <RewardCard
+              icon={item.icon}
+              description={item.description}
+              backgroundColor={item.backgroundColor}
+              xp={item.xp}
+            />
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   rewardContainer: {
-    marginTop: 20,
-    width: '100%',
+    flex: 1,
+    paddingHorizontal: 4,
+    paddingTop: 8,
   },
   rewardTitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
-    marginLeft: 10,
+    marginBottom: 8,
   },
-  row: {
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
+  itemContainer: {
+    width: '50%', // Adjust according to your preference for two columns
+    marginBottom: 8,
+  },
 });
-
 export default RewardSection;
