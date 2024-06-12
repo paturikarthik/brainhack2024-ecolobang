@@ -69,7 +69,8 @@ const LineChartComponent = () => {
         width={screenWidth * 0.95}
         height={220}
         yAxisLabel=""
-        yAxisSuffix="kWh"
+        yAxisSuffix={selectedElement === 1 ? "L" : "kWh"}
+
         chartConfig={{
           backgroundColor: '#e26a00',
           backgroundGradientFrom: selectedElement === 1 ? '#8db3f0' : '#f7cbf7', 
